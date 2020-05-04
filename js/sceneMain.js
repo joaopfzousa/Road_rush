@@ -11,6 +11,13 @@ class SceneMain extends Phaser.Scene {
             frameWidth: 60,
             frameHeight: 126
         });
+        this.load.image("pcar1", "images/pcar1.png");
+        this.load.image("pcar2", "images/pcar2.png");
+        this.load.image("cone", "images/cone.png");
+        this.load.image("barrier", "images/barrier.png");
+
+
+
     }
     create() {
        //define our objects
@@ -22,6 +29,7 @@ class SceneMain extends Phaser.Scene {
     update() {
         //constant running loop
         this.road.moveLines();
+        this.road.moveObject();
     }
 
 }
