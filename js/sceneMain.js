@@ -19,21 +19,30 @@ class SceneMain extends Phaser.Scene {
 
 
     }
-    create() {
-       //define our objects
-       emitter = new Phaser.Events.EventEmitter();
-       controller = new Controller();
 
-       this.sb = new ScoreBox({scene:this});
-       this.sb.x = game.config.width - 50;
-       this.sb.y = 50;
+    create() 
+    {
+        //define our objects
+        emitter = new Phaser.Events.EventEmitter();
+        controller = new Controller();
 
-       console.log("Ready!");
-       this.road = new Road({scene:this});
-       this.road.x = game.config.width/2;
-       this.road.makeLines();
+        this.sb = new ScoreBox({scene:this});
+        this.sb.x = game.config.width - 50;
+        this.sb.y = 50;
+
+        console.log("Ready!");
+        this.road = new Road({scene:this});
+        this.road.x = game.config.width/2;
+        this.road.makeLines();
+
+        var gridConfig = {rows: 5, cols: 5, scene: this};
+        this.alignGrid = new AlignGrid(gridConfig);
+        this.alignGrid.showNumbers();
+        this.alignGrid.placeAtIndex(4, this.sb);
     }
-    update() {
+
+    update() 
+    {
         //constant running loop
         this.road.moveLines();
         this.road.moveObject();
