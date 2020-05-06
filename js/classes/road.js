@@ -121,5 +121,4 @@ class Road extends Phaser.GameObjects.Container
             this.addObject();
         }
     }
-
 }

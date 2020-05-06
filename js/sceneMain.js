@@ -21,6 +21,9 @@ class SceneMain extends Phaser.Scene {
     }
     create() {
        //define our objects
+       emitter = new Phaser.Events.EventEmitter();
+       controller = new Controller();
+       model.score = 100;
        console.log("Ready!");
        this.road = new Road({scene:this});
        this.road.x = game.config.width/2;
