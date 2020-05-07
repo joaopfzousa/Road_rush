@@ -7,6 +7,7 @@ class SceneTitle extends Phaser.Scene {
         //load our images or sounds 
         this.load.image("title", "images/title.png");
         this.load.image("button1", "images/ui/buttons/2/1.png");
+        this.load.image("titleBack", "images/titleBack.jpg");
     }
 
     create() 
@@ -22,7 +23,10 @@ class SceneTitle extends Phaser.Scene {
             scene: this
         });
 
-        //this.alignGrid.showNumbers();
+        this.alignGrid.showNumbers();
+
+        var titleBack = this.add.image(0, 0, 'titleBack');
+        this.alignGrid.placeAtIndex(49, titleBack);
 
         var title = this.add.image(0, 0, 'title');
         Align.scaleToGameW(title, .8);
