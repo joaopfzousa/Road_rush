@@ -20,24 +20,34 @@ class SceneMain extends Phaser.Scene {
         this.load.image("pcar2", "images/pcar2.png");
         this.load.image("cone", "images/cone.png");
         this.load.image("barrier", "images/barrier.png");
+
+        //load sound
+        this.load.audio("boom", ["audio/boom.mp3", "audio/boom.ogg"]);
+        this.load.audio("backgroundMusic", ["audio/random-race.mp3", "audio/random-race.ogg"]);
+        this.load.audio("whoosh", ["audio/whoosh.mp3", "audio/whoosh.ogg"]);
     }
 
     create() 
     {
         //define our objects
+        console.log("Ready!");
+
         emitter = new Phaser.Events.EventEmitter();
         controller = new Controller();
 
+        var mediaManager = new MediaManager({scene: this});
+        model.gameOver = false;
+
+        //mediaManager.setBackgroundMusic('backgroundMusic');
+        
         this.sb = new ScoreBox({scene:this});
         this.sb.x = game.config.width - 50;
         this.sb.y = 50;
 
-        console.log("Ready!");
         this.road = new Road({scene:this});
         this.road.x = game.config.width/2;
         this.road.makeLines();
 
-       
         this.alignGrid = new AlignGrid({
             rows: 5, 
             cols: 5, 
@@ -47,38 +57,8 @@ class SceneMain extends Phaser.Scene {
         //this.alignGrid.showNumbers();
         this.alignGrid.placeAtIndex(4, this.sb);
 
-        /*
-        var flatButton = new FlatButton({
-            scene: this, 
-            key: 'button1',
-            text: 'Fire!!',
-            x: 240, 
-            y: 100, 
-            event: 'button_pressed', 
-            params: 'fire_lasers', 
-            textConfig: {
-                color: 'black',
-                fontSize: 30
-            }
-        });
-
-        var flatButton2 = new FlatButton({
-            scene: this, 
-            key: 'button2',
-            text: 'Destruct!!',
-            x: 240, 
-            y: 300, 
-            event: 'button_pressed', 
-            params: 'self_destruct'
-        });
-
-        emitter.on('button_pressed', this.buttonPressed, this);
-        */
-    }
-
-    buttonPressed(params)
-    {
-        console.log(params);
+    
+        var soundButtons = new SoundButtons({scene: this});
     }
 
     update() 
