@@ -17,9 +17,7 @@ class SceneMain extends Phaser.Scene {
 
         var mediaManager = new MediaManager({scene: this});
         model.gameOver = false;
-
-        //mediaManager.setBackgroundMusic('backgroundMusic');
-        
+    
         this.sb = new ScoreBox({scene:this});
         this.sb.x = game.config.width - 50;
         this.sb.y = 50;
