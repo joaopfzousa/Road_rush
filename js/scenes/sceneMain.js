@@ -4,27 +4,7 @@ class SceneMain extends Phaser.Scene {
     }
     preload()
     {
-        //load our images or sounds 
-        //load estrada
-        this.load.image("road", "images/road.jpg");
-        this.load.image("line", "images/line.png");
-
-        //load ator principal
-        this.load.spritesheet("cars", "images/cars.png", {
-            frameWidth: 60,
-            frameHeight: 126
-        });
-
-        // load enimigos
-        this.load.image("pcar1", "images/pcar1.png");
-        this.load.image("pcar2", "images/pcar2.png");
-        this.load.image("cone", "images/cone.png");
-        this.load.image("barrier", "images/barrier.png");
-
-        //load sound
-        this.load.audio("boom", ["audio/boom.mp3", "audio/boom.ogg"]);
-        this.load.audio("backgroundMusic", ["audio/random-race.mp3", "audio/random-race.ogg"]);
-        this.load.audio("whoosh", ["audio/whoosh.mp3", "audio/whoosh.ogg"]);
+        
     }
 
     create() 

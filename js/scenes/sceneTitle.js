@@ -4,18 +4,7 @@ class SceneTitle extends Phaser.Scene {
     }
     preload()
     {
-        //load our images or sounds 
-        this.load.image("title", "images/title.png");
-        this.load.image("button1", "images/ui/buttons/2/1.png");
-        this.load.image("titleBack", "images/titleBack.jpg");
-
-        this.load.audio("background", ["audio/background.mp3", "audio/background.ogg"]);
-
-        this.load.image("toggleBack", "images/ui/toggles/1.png");
-        this.load.image("sfxOff", "images/ui/icons/sfx_off.png");
-        this.load.image("sfxOn", "images/ui/icons/sfx_on.png");
-        this.load.image("musicOn", "images/ui/icons/music_on.png");
-        this.load.image("musicOff", "images/ui/icons/music_off.png");
+       
     }
 
     create() 
@@ -26,7 +15,7 @@ class SceneTitle extends Phaser.Scene {
         controller = new Controller();
 
         var mediaManager = new MediaManager({scene: this});
-        //mediaManager.setBackgroundMusic('background');
+        ///mediaManager.setBackgroundMusic('background');
 
         this.alignGrid = new AlignGrid({
             rows:11, 
