@@ -79,7 +79,8 @@ class Road extends Phaser.GameObjects.Container
             return;
         }
 
-        emitter.emit(G.PLAY_SOUND, "whoosh");
+        mediaManager.playSound("whoosh");
+        //emitter.emit(G.PLAY_SOUND, "whoosh");
 
         if(this.car.x > 0)
         {

@@ -13,33 +13,36 @@ class SoundButtons extends Phaser.GameObjects.Container
              event:G.TOGGLE_MUSIC
         });
 
+        /*
         this.sfxButton = new ToggleButton({
             scene:this.scene,
             backKey:'toggleBack',
             onIcon:'sfxOn',
             offIcon:'sfxOff',
             event:G.TOGGLE_SOUND
-        });
+        });*/
 
         this.add(this.musicButton);
-        this.add(this.sfxButton);
+       // this.add(this.sfxButton);
 
         this.musicButton.y=this.musicButton.height/2;
         this.musicButton.x=this.musicButton.width/2;
 
-        this.sfxButton.x=game.config.width-this.sfxButton.width/2;
-        this.sfxButton.y=this.musicButton.y;
+        //this.sfxButton.x=game.config.width-this.sfxButton.width/2;
+        //this.sfxButton.y=this.musicButton.y;
 
         if(model._musicOn == false)
         {
-            this.musicButton.toggle();
+            this.musicButton.toggle(this.scene);
         }
 
+        /*
         if(model._SoundOn == false)
         {
             this.sfxButton.toggle();
         }
-
+        */
+        
         this.scene.add.existing(this);
 	}
 }

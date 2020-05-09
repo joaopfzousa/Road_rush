@@ -3,6 +3,7 @@ class MediaManager
     constructor(config)
     {
         this.scene = config.scene;
+        this.background;
         emitter.on(G.PLAY_SOUND, this.playSound, this);
         emitter.on(G.MUSIC_CHANGED, this.musicChanged, this);
     }
@@ -35,12 +36,11 @@ class MediaManager
         console.log("play sound");
         if(model._musicOn == true)
         {
-            var background = this.scene.sound.add(key, {
+            this.background = this.scene.sound.add(key, {
                 volume: .5, 
                 loop: true
             });
-            background.play();
-        }
-        
+            this.background.play();
+        }        
     }
 }

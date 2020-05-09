@@ -51,7 +51,7 @@ class ToggleButton extends Phaser.GameObjects.Container
     
 	toggle()
 	{
-		this.value=!this.value;
+		this.value = !this.value;
 		this.setIcons();
 		if (this.event)
 		{
