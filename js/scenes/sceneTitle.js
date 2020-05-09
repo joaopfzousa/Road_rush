@@ -47,8 +47,7 @@ class SceneTitle extends Phaser.Scene {
         var soundButtons = new SoundButtons({scene: this});
         //this.alignGrid.showNumbers();
 
-       
-        mediaManager.setBackgroundMusic('background');
+        mediaManager.setBackgroundMusic('backgroundMusic');
 
         emitter.on('start_game', this.startGame, this);
     }
