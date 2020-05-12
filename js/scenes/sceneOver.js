@@ -23,9 +23,9 @@ class SceneOver extends Phaser.Scene {
         var titleBack = this.add.image(0, 0, 'titleBack');
         this.alignGrid.placeAtIndex(49, titleBack);
 
-        var title = this.add.image(0, 0, 'title');
-        Align.scaleToGameW(title, .8);
-        this.alignGrid.placeAtIndex(27, title);
+        var lost = this.add.image(0, 0, 'lost');
+        Align.scaleToGameW(lost, .8);
+        this.alignGrid.placeAtIndex(27, lost);
 
         var btnStart = new FlatButton({
             scene: this, 
@@ -45,13 +45,6 @@ class SceneOver extends Phaser.Scene {
         emitter.on('start_game', this.startGame, this);
 
         var soundButtons = new SoundButtons({scene: this});
-
-
-        this.WinerText = this.add.text(game.config.width/2, game.config.height/2, "YOU LOST", {
-            color: '#000000',
-            fontSize: game.config.width/20
-        });
-        this.WinerText.setOrigin(0.5, 0.5);
 
         model.velocity = 20;
         model.score = 0;
