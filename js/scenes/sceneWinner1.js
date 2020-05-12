@@ -50,6 +50,8 @@ class SceneWinner1 extends Phaser.Scene {
             fontSize: game.config.width/20
         });
         this.WinerText.setOrigin(0.5, 0.5);
+        
+        model.velocity = 10;
     }
 
     nextLevel()

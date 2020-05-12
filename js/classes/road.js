@@ -59,12 +59,12 @@ class Road extends Phaser.GameObjects.Container
         }
 
         this.lineGroup.children.iterate(function(child){
-            child.y += this.vSpace/20;
+            child.y += this.vSpace/model.velocity;
         }.bind(this));
 
         this.count++;
 
-        if(this.count == 20)
+        if(this.count == model.velocity)
         {
             this.count = 0;
             this.lineGroup.children.iterate(function(child){
@@ -100,22 +100,22 @@ class Road extends Phaser.GameObjects.Container
         var objs = [
             {
                 key:'pcar1',
-                speed:10, 
+                speed: model.velocity / 2, 
                 scale:10
             }, 
             {
                 key:'pcar2', 
-                speed:10, 
+                speed:model.velocity / 2, 
                 scale:10
             }, 
             {
                 key:'cone', 
-                speed:20, 
+                speed: model.velocity, 
                 scale:5
             }, 
             {
                 key:'barrier', 
-                speed:20, 
+                speed: model.velocity, 
                 scale:8
             }
         ];

@@ -6,6 +6,7 @@ class Model
         this.soundOn = true;
         this._musicOn = true;
         this.gameOver = false;
+        this._velocity = 20;
     }
 
     set musicOn(val) 
@@ -31,5 +32,16 @@ class Model
     get score() 
     {
         return this._score;
+    }
+
+    set velocity(val) 
+    {
+        this._velocity = val;
+        console.log("velocity changed");
+    }
+
+    get velocity() 
+    {
+        return this._velocity;
     }
 }
