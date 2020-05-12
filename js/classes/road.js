@@ -151,7 +151,7 @@ class Road extends Phaser.GameObjects.Container
 
     goNextLevel2()
     {
-        this.scene.start("SceneWinner1");
+        this.scene.start("SceneWinner2");
     }
 
     //mover os objetos

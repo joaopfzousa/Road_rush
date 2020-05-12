@@ -1,6 +1,6 @@
-class SceneTitle extends Phaser.Scene {
+class SceneWinner2 extends Phaser.Scene {
     constructor() {
-        super('SceneTitle');
+        super('SceneWinner2');
     }
     preload()
     {
@@ -10,15 +10,15 @@ class SceneTitle extends Phaser.Scene {
     create() 
     {
         //define our objects
-        console.log("SceneTitle!");
-        emitter = new Phaser.Events.EventEmitter();
-        controller = new Controller();
+        console.log("SceneWinner2!");
 
         this.alignGrid = new AlignGrid({
             rows:11, 
             cols:11, 
             scene: this
         });
+
+        this.alignGrid.showNumbers();
 
         var titleBack = this.add.image(0, 0, 'titleBack');
         this.alignGrid.placeAtIndex(49, titleBack);
@@ -29,11 +29,11 @@ class SceneTitle extends Phaser.Scene {
 
         var btnStart = new FlatButton({
             scene: this, 
-            key: 'button1',
-            text: 'Start Game!!',
+            key: 'button2',
+            text: 'FINAL LEVEL!!',
             x: 240, 
             y: 100, 
-            event: 'start_game',
+            event: 'final_level', 
             textConfig: {
                 color: 'black',
                 fontSize: 20
@@ -42,23 +42,27 @@ class SceneTitle extends Phaser.Scene {
 
         this.alignGrid.placeAtIndex(93, btnStart);
 
-        mediaManager = new MediaManager({scene: this});
+        emitter.on('final_level', this.nextLevel2, this);
+
         var soundButtons = new SoundButtons({scene: this});
-        //this.alignGrid.showNumbers();
 
-        mediaManager.setBackgroundMusic('backgroundMusic');
 
-        emitter.on('start_game', this.startGame, this);
+        this.WinerText = this.add.text(game.config.width/2, game.config.height/2, "YOU WIN, CLICK TO NEXT LEVEL", {
+            color: '#000000',
+            fontSize: game.config.width/20
+        });
+        this.WinerText.setOrigin(0.5, 0.5);
+
+        model.velocity = 10;
     }
 
-    startGame()
+    nextLevel2()
     {
-        this.scene.start('SceneMain');
+        this.scene.start('SceneLast');
     }
 
     update() 
     {
         //constant running loop
     }
-
 }

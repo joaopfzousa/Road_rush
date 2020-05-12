@@ -34,7 +34,6 @@ class SceneWinner1 extends Phaser.Scene {
             x: 240, 
             y: 100, 
             event: 'next_level', 
-            params: 'fire_lasers', 
             textConfig: {
                 color: 'black',
                 fontSize: 20
@@ -45,12 +44,15 @@ class SceneWinner1 extends Phaser.Scene {
 
         emitter.on('next_level', this.nextLevel, this);
 
-        this.WinerText = this.add.text(game.config.width/2, game.config.height/2, "YOU WIN FIRST LEVEL", {
+        var soundButtons = new SoundButtons({scene: this});
+
+
+        this.WinerText = this.add.text(game.config.width/2, game.config.height/2, "YOU WIN, CLICK TO NEXT LEVEL", {
             color: '#000000',
             fontSize: game.config.width/20
         });
         this.WinerText.setOrigin(0.5, 0.5);
-        
+
         model.velocity = 10;
     }
 
@@ -61,7 +63,6 @@ class SceneWinner1 extends Phaser.Scene {
 
     update() 
     {
-        //model.score = 0;
         //constant running loop
     }
 }

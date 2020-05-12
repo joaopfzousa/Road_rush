@@ -34,7 +34,6 @@ class SceneOver extends Phaser.Scene {
             x: 240, 
             y: 100, 
             event: 'start_game', 
-            params: 'fire_lasers', 
             textConfig: {
                 color: 'black',
                 fontSize: 20
@@ -44,6 +43,18 @@ class SceneOver extends Phaser.Scene {
         this.alignGrid.placeAtIndex(93, btnStart);
 
         emitter.on('start_game', this.startGame, this);
+
+        var soundButtons = new SoundButtons({scene: this});
+
+
+        this.WinerText = this.add.text(game.config.width/2, game.config.height/2, "YOU LOST", {
+            color: '#000000',
+            fontSize: game.config.width/20
+        });
+        this.WinerText.setOrigin(0.5, 0.5);
+
+        model.velocity = 20;
+        model.score = 0;
     }
 
     startGame()
