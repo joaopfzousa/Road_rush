@@ -9,6 +9,9 @@ class ScoreBox extends Phaser.GameObjects.Container
         this.text1.setOrigin(0.5, 0.5);
         this.add(this.text1);
 
+
+        this.text1.setBackgroundColor("#000000");
+
         this.scene.add.existing(this);
 
         emitter.on(G.SCORE_UPDATED, this.scoreUpdated, this);
