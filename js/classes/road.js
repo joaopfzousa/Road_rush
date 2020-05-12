@@ -33,6 +33,8 @@ class Road extends Phaser.GameObjects.Container
 
         //add object
         this.addObject();
+
+        emitter.emit(G.SET_SCORE, model.score);
     }
 
     //criar as linhas no meio da estrada
@@ -142,6 +144,16 @@ class Road extends Phaser.GameObjects.Container
         this.scene.start("SceneOver");
     }
 
+    goNextLevel()
+    {
+        this.scene.start("SceneWinner1");   
+    }
+
+    goNextLevel2()
+    {
+        this.scene.start("SceneWinner1");
+    }
+
     //mover os objetos
     moveObject()
     {
@@ -181,6 +193,27 @@ class Road extends Phaser.GameObjects.Container
         {
             emitter.emit(G.UP_POINTS, 1);
             this.object.destroy();
+
+            if( model.score == 2)
+            {
+                this.scene.time.addEvent({
+                    delay: 0,
+                    callback: this.goNextLevel, 
+                    callbackScope: this.scene, 
+                    loop: false
+                });
+            }
+
+            if( model.score == 4)
+            {
+                this.scene.time.addEvent({
+                    delay: 0,
+                    callback: this.goNextLevel2, 
+                    callbackScope: this.scene, 
+                    loop: false
+                });
+            }
+
             this.addObject();
         }
     }

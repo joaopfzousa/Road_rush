@@ -45,6 +45,7 @@ class SceneLoad extends Phaser.Scene {
         //load our images or sounds 
         this.load.image("title", "images/title.png");
         this.load.image("button1", "images/ui/buttons/2/1.png");
+        this.load.image("button2", "images/ui/buttons/2/2.png");
         this.load.image("titleBack", "images/titleBack.jpg");
         this.load.audio("background", ["audio/background.mp3", "audio/background.ogg"]);
         this.load.image("toggleBack", "images/ui/toggles/1.png");
