@@ -1,6 +1,6 @@
-class SceneTitle extends Phaser.Scene {
+class SceneWinner3 extends Phaser.Scene {
     constructor() {
-        super('SceneTitle');
+        super('SceneWinner3');
     }
     preload()
     {
@@ -10,9 +10,7 @@ class SceneTitle extends Phaser.Scene {
     create() 
     {
         //define our objects
-        console.log("SceneTitle!");
-        emitter = new Phaser.Events.EventEmitter();
-        controller = new Controller();
+        console.log("SceneWinner3!");
 
         this.alignGrid = new AlignGrid({
             rows:11, 
@@ -20,20 +18,22 @@ class SceneTitle extends Phaser.Scene {
             scene: this
         });
 
+        this.alignGrid.showNumbers();
+
         var titleBack = this.add.image(0, 0, 'titleBack');
         this.alignGrid.placeAtIndex(49, titleBack);
 
-        var title = this.add.image(0, 0, 'title');
-        Align.scaleToGameW(title, .8);
-        this.alignGrid.placeAtIndex(27, title);
+        var bigWin = this.add.image(0, 0, 'bigWin');
+        Align.scaleToGameW(bigWin, .8);
+        this.alignGrid.placeAtIndex(38, bigWin);
 
         var btnStart = new FlatButton({
             scene: this, 
-            key: 'button1',
-            text: 'Start Game!!',
+            key: 'button2',
+            text: 'GO TO INIT!!',
             x: 240, 
             y: 100, 
-            event: 'start_game',
+            event: 'main_scene', 
             textConfig: {
                 color: 'black',
                 fontSize: 20
@@ -42,24 +42,20 @@ class SceneTitle extends Phaser.Scene {
 
         this.alignGrid.placeAtIndex(93, btnStart);
 
-        mediaManager = new MediaManager({scene: this});
-        
-        //this.alignGrid.showNumbers();
+        emitter.on('main_scene', this.mainScene, this);
 
-        mediaManager.setBackgroundMusic('backgroundMusic');
         var soundButtons = new SoundButtons({scene: this});
 
-        emitter.on('start_game', this.startGame, this);
+        model.velocity = 10;
     }
 
-    startGame()
+    mainScene()
     {
-        this.scene.start('SceneMain');
+        this.scene.start('SceneTitle');
     }
 
     update() 
     {
         //constant running loop
     }
-
 }

@@ -154,6 +154,11 @@ class Road extends Phaser.GameObjects.Container
         this.scene.start("SceneWinner2");
     }
 
+    goMainAfterWIn()
+    {
+        this.scene.start("SceneWinner3");
+    }
+
     //mover os objetos
     moveObject()
     {
@@ -194,7 +199,7 @@ class Road extends Phaser.GameObjects.Container
             emitter.emit(G.UP_POINTS, 1);
             this.object.destroy();
 
-            if( model.score == 2)
+            if( model.score == 1)
             {
                 this.scene.time.addEvent({
                     delay: 0,
@@ -204,11 +209,21 @@ class Road extends Phaser.GameObjects.Container
                 });
             }
 
-            if( model.score == 4)
+            if( model.score == 2)
             {
                 this.scene.time.addEvent({
                     delay: 0,
                     callback: this.goNextLevel2, 
+                    callbackScope: this.scene, 
+                    loop: false
+                });
+            }
+
+            if( model.score == 3)
+            {
+                this.scene.time.addEvent({
+                    delay: 0,
+                    callback: this.goMainAfterWIn, 
                     callbackScope: this.scene, 
                     loop: false
                 });

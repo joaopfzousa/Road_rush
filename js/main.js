@@ -20,7 +20,7 @@ window.onload=function()
             width: 480,
             height: 640,
             parent: 'phaser-game',
-            scene: [SceneLoad, SceneTitle, SceneMain, SceneOver, SceneWinner1, SceneWinner2, SceneLast]
+            scene: [SceneLoad, SceneTitle, SceneMain, SceneOver, SceneWinner1, SceneWinner2, SceneLast, SceneWinner3]
         };
     }else{
         var config = {
@@ -28,7 +28,7 @@ window.onload=function()
             width: window.innerWidth,
             height: window.innerHeight,
             parent: 'phaser-game',
-            scene: [SceneLoad, SceneTitle, SceneMain, SceneOver, SceneWinner1, SceneWinner2, SceneLast]
+            scene: [SceneLoad, SceneTitle, SceneMain, SceneOver, SceneWinner1, SceneWinner2, SceneLast, SceneWinner3]
         };
     }
 	

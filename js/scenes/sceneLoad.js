@@ -56,6 +56,7 @@ class SceneLoad extends Phaser.Scene {
 
         this.load.image("win", "images/YOU-WIN.png");
         this.load.image("lost", "images/YOU-Lost.png");
+        this.load.image("bigWin", "images/youAreAWinner.png");
 
     }
     
