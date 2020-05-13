@@ -1,5 +1,11 @@
 # Game Road Rush
 
+Road Rash is a motorcycle racing game in which you participate in violent, illegal street races. The series started in 1991 on the Sega Genesis and was released on various other systems over the years.
+
+This is my Road R(u)sh, it became a car, where you win or die, three levels, from the easiest to the most hardcore.
+
+If you have a mouse and the right skill, what are you waiting for?
+
 ## Screenshots
 Screenshots of all scenes from the game Road Rush.
 
@@ -26,3 +32,6 @@ Screenshots of all scenes from the game Road Rush.
 ![Alt text](https://github.com/joaopfzousa/Road_rush/blob/master/screenshots/nosound.png "Sound OFF")
 
 
+## Run Game
+
+Install the [Visual Studio Code](https://code.visualstudio.com) and Download [Live Server(VSCode Extension)](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
