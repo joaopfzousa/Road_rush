@@ -37,3 +37,7 @@ Screenshots of all scenes from the game Road Rush.
 Install the [Visual Studio Code](https://code.visualstudio.com) and Download [Live Server(VSCode Extension)](https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer)
 
 After this open this project and click on the bottom right corner ![Alt text](https://github.com/joaopfzousa/Road_rush/blob/master/screenshots/goLive.png "GO LIVE")
+
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)
