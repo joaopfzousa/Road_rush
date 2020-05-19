@@ -20,7 +20,13 @@ window.onload=function()
             width: 480,
             height: 640,
             parent: 'phaser-game',
-            scene: [SceneLoad, SceneTitle, SceneMain, SceneOver, SceneWinner1, SceneWinner2, SceneLast, SceneWinner3]
+            scene: [SceneLoad, SceneTitle, SceneMain, SceneOver, SceneWinner1, SceneWinner2, SceneLast, SceneWinner3], 
+            physics: {
+                default: "arcade",
+                arcade: {
+                  debug: true
+                }
+            }
         };
     }else{
         var config = {
@@ -28,7 +34,13 @@ window.onload=function()
             width: window.innerWidth,
             height: window.innerHeight,
             parent: 'phaser-game',
-            scene: [SceneLoad, SceneTitle, SceneMain, SceneOver, SceneWinner1, SceneWinner2, SceneLast, SceneWinner3]
+            scene: [SceneLoad, SceneTitle, SceneMain, SceneOver, SceneWinner1, SceneWinner2, SceneLast, SceneWinner3],
+            physics: {
+                default: "arcade",
+                arcade: {
+                  debug: true
+                }
+            }
         };
     }
 	
@@ -36,4 +48,23 @@ window.onload=function()
     model = new Model();
     this.model.isMobile = isMobile;
     game = new Phaser.Game(config);
+    window.focus();
+    resizeGame();
+    window.addEventListener("resize", resizeGame);
+}
+
+function resizeGame(){
+    var canvas = document.querySelector("canvas");
+    var windowWidth = window.innerWidth;
+    var windowHeight = window.innerHeight;
+    var windowRatio = windowWidth / windowHeight;
+    var gameRatio = game.config.width / game.config.height;
+    if(windowRatio < gameRatio){
+        canvas.style.width = windowWidth + "px";
+        canvas.style.height = (windowWidth / gameRatio) + "px";
+    }
+    else{
+        canvas.style.width = (windowHeight * gameRatio) + "px";
+        canvas.style.height = windowHeight + "px";
+    }
 }

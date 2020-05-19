@@ -26,15 +26,34 @@ class Road extends Phaser.GameObjects.Container
         Align.scaleToGameW(this.car, .10);
         this.add(this.car);
 
+        this.power = 0;
 
         //add click
         this.back.setInteractive();
-        this.back.on('pointerdown', this.changeLanes, this);
+        //this.back.on('gameobjectmove', this.moveCar, this);
+
+        this.back.on('pointerdown', this.startInvisible, this);
+        this.back.on('pointerup', this.endInvisible, this);
 
         //add object
         this.addObject();
 
         emitter.emit(G.SET_SCORE, model.score);
+    }
+
+    startInvisible()
+    {
+        this.car.alpha = 0;
+        this.scene.tweens.add({
+            targets: this.car,
+            duration: 1000
+        });
+       
+    }
+
+    endInvisible()
+    {
+        this.car.alpha = 1;
     }
 
     //criar as linhas no meio da estrada
@@ -74,7 +93,7 @@ class Road extends Phaser.GameObjects.Container
     }
 
     //O carro trocar de linhas (esquerda/direita)
-    changeLanes()
+    moveCar(cursors)
     {
         if(model.gameOver == true)
         {
@@ -84,12 +103,9 @@ class Road extends Phaser.GameObjects.Container
         mediaManager.playSound("whoosh");
         //emitter.emit(G.PLAY_SOUND, "whoosh");
 
-        if(this.car.x > 0)
-        {
-            //esquerdas
+        if(cursors.left.isDown){
             this.car.x = - this.displayWidth/4;
-        }else{
-            //direita
+        }else if(cursors.right.isDown){
             this.car.x = this.displayWidth/4;
         }
     }
@@ -169,67 +185,71 @@ class Road extends Phaser.GameObjects.Container
 
         this.object.y += this.vSpace / this.object.speed;
 
-        if(Collision.checkCollide(this.car, this.object) == true)
+        if(this.car.alpha != 0)
         {
-            //this.car.alpha = .5;
-            model.gameOver = true;
-            emitter.emit(G.PLAY_SOUND, "boom");
+            if(Collision.checkCollide(this.car, this.object) == true)
+            {
+                //this.car.alpha = .5;
+                model.gameOver = true;
+                emitter.emit(G.PLAY_SOUND, "boom");
 
-            //girar o carro para tras
-            this.scene.tweens.add({
-                targets: this.car,
-                duration: 1000, 
-                y: game.config.height, 
-                angle: -270
-            });
+                //girar o carro para tras
+                this.scene.tweens.add({
+                    targets: this.car,
+                    duration: 1000, 
+                    y: game.config.height, 
+                    angle: -270
+                });
 
-            this.scene.time.addEvent({
-                delay: 2000,
-                callback: this.goGameOver, 
-                callbackScope: this.scene, 
-                loop: false
-            });
+                this.scene.time.addEvent({
+                    delay: 2000,
+                    callback: this.goGameOver, 
+                    callbackScope: this.scene, 
+                    loop: false
+                });
 
-        }else{
-            //this.car.alpha = 1;
+            }else{
+                //this.car.alpha = 1;
+            }
+
+            if(this.object.y > game.config.height)
+            {
+                emitter.emit(G.UP_POINTS, 1);
+                this.object.destroy();
+
+                if( model.score == 2)
+                {
+                    this.scene.time.addEvent({
+                        delay: 0,
+                        callback: this.goNextLevel, 
+                        callbackScope: this.scene, 
+                        loop: false
+                    });
+                }
+
+                if( model.score == 4)
+                {
+                    this.scene.time.addEvent({
+                        delay: 0,
+                        callback: this.goNextLevel2, 
+                        callbackScope: this.scene, 
+                        loop: false
+                    });
+                }
+
+                if( model.score == 6)
+                {
+                    this.scene.time.addEvent({
+                        delay: 0,
+                        callback: this.goMainAfterWIn, 
+                        callbackScope: this.scene, 
+                        loop: false
+                    });
+                }
+
+                this.addObject();
+            }
         }
-
-        if(this.object.y > game.config.height)
-        {
-            emitter.emit(G.UP_POINTS, 1);
-            this.object.destroy();
-
-            if( model.score == 10)
-            {
-                this.scene.time.addEvent({
-                    delay: 0,
-                    callback: this.goNextLevel, 
-                    callbackScope: this.scene, 
-                    loop: false
-                });
-            }
-
-            if( model.score == 20)
-            {
-                this.scene.time.addEvent({
-                    delay: 0,
-                    callback: this.goNextLevel2, 
-                    callbackScope: this.scene, 
-                    loop: false
-                });
-            }
-
-            if( model.score == 30)
-            {
-                this.scene.time.addEvent({
-                    delay: 0,
-                    callback: this.goMainAfterWIn, 
-                    callbackScope: this.scene, 
-                    loop: false
-                });
-            }
-
-            this.addObject();
-        }
+        
     }
 }

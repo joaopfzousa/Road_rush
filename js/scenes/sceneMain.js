@@ -37,11 +37,14 @@ class SceneMain extends Phaser.Scene {
 
     
         var soundButtons = new SoundButtons({scene: this});
+
+        this.cursors = this.input.keyboard.createCursorKeys()
     }
 
     update() 
     {
         //constant running loop
+        this.road.moveCar(this.cursors);
         this.road.moveLines();
         this.road.moveObject();
     }
