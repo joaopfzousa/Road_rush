@@ -217,7 +217,7 @@ class Road extends Phaser.GameObjects.Container
                 emitter.emit(G.UP_POINTS, 1);
                 this.object.destroy();
 
-                if( model.score == 2)
+                if( model.score == 5)
                 {
                     this.scene.time.addEvent({
                         delay: 0,
@@ -227,7 +227,7 @@ class Road extends Phaser.GameObjects.Container
                     });
                 }
 
-                if( model.score == 4)
+                if( model.score == 10)
                 {
                     this.scene.time.addEvent({
                         delay: 0,
@@ -237,7 +237,7 @@ class Road extends Phaser.GameObjects.Container
                     });
                 }
 
-                if( model.score == 6)
+                if( model.score == 15)
                 {
                     this.scene.time.addEvent({
                         delay: 0,

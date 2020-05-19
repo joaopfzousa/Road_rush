@@ -18,11 +18,6 @@ class SceneLast extends Phaser.Scene {
         this.road.x = game.config.width * .25;
         this.road.makeLines();
 
-        this.road2 = new Road({scene:this});
-        this.road2.x = game.config.width * .75;
-        this.road2.makeLines();
-        this.road2.car.setFrame(1);
-
         this.alignGrid = new AlignGrid({
             rows: 5, 
             cols: 5, 
@@ -30,24 +25,21 @@ class SceneLast extends Phaser.Scene {
         });
 
         //this.alignGrid.showNumbers();
-        
-
-    
         var soundButtons = new SoundButtons({scene: this});
 
         this.sb = new ScoreBox({scene:this});
         this.sb.x = game.config.width/2;
         this.sb.y = 50;
         //this.alignGrid.placeAtIndex(4, this.sb);
+
+        this.cursors = this.input.keyboard.createCursorKeys();
     }
 
     update() 
     {
         //constant running loop
+        this.road.moveCar(this.cursors);
         this.road.moveLines();
         this.road.moveObject();
-
-        this.road2.moveLines();
-        this.road2.moveObject();
     }
 }

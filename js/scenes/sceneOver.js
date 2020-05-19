@@ -45,14 +45,22 @@ class SceneOver extends Phaser.Scene {
         emitter.on('start_game', this.startGame, this);
 
         var soundButtons = new SoundButtons({scene: this});
-
-        model.velocity = 20;
-        model.score = 0;
     }
 
     startGame()
     {
-        this.scene.start('SceneMain');
+        if(model.score < 5)
+        {
+            model.velocity = 10;
+            model.score = 0;
+            this.scene.start('SceneMain');
+        }else if(model.score == 5) {
+            model.velocity = 20;
+            this.scene.start('SceneMain');
+        }else if(model.score == 10){
+            model.velocity = 20;
+            this.scene.start('SceneLast');
+        }
     }
 
     update() 
