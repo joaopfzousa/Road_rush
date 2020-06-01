@@ -46,7 +46,7 @@ class SceneWinner3 extends Phaser.Scene {
 
         var soundButtons = new SoundButtons({scene: this});
 
-        model.velocity = 10;
+        //model.velocity = 10;
     }
 
     mainScene()

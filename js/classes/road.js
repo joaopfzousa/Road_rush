@@ -60,7 +60,7 @@ class Road extends Phaser.GameObjects.Container
     makeLines()
     {
         this.vSpace = this.displayHeight/10;
-
+ 
         for(var i = 0; i < 20; i++)
         {
             var line = this.scene.add.image(this.x, this.vSpace * i, "line");
@@ -108,6 +108,15 @@ class Road extends Phaser.GameObjects.Container
         }else if(cursors.right.isDown){
             this.car.x = this.displayWidth/4;
         }
+        
+        if(model.score >= 10)
+        {
+            if(cursors.down.isDown){
+                this.car.y += 10;
+            }else if(cursors.up.isDown){
+                this.car.y -= 10;
+            }
+        }
     }
 
     //adiconar os vários objetos 
@@ -140,7 +149,6 @@ class Road extends Phaser.GameObjects.Container
         var speed = objs[index].speed;
         var scale = objs[index].scale / 100;
 
-
         var lane = Math.random() * 100;
 
         this.object = this.scene.add.sprite(- this.displayWidth/4, 0, key);
@@ -153,6 +161,28 @@ class Road extends Phaser.GameObjects.Container
 
         Align.scaleToGameW(this.object, scale);
         this.add(this.object);
+
+        
+        if(model.score >= 10)
+        {
+            this.object2 = this.scene.add.sprite(game.config.height/2, 0, key);
+            this.object2.speed = speed;
+            if(objs[index].key == 'pcar1' || objs[index].key == 'pcar2')
+                this.object2.angle = -90;
+
+            if(lane < 25)
+            {
+                this.object2.y = game.config.height/2.5;
+            }else if(lane >= 25 ||lane <= 75 ){
+                this.object2.y = game.config.height/1.5;
+            }else if(lane > 75){
+                this.object2.y = game.config.height/3.5;
+            }
+
+            Align.scaleToGameW(this.object2, scale);
+            this.add(this.object2);
+        }     
+         
     }
 
     goGameOver()
@@ -189,7 +219,6 @@ class Road extends Phaser.GameObjects.Container
         {
             if(Collision.checkCollide(this.car, this.object) == true)
             {
-                //this.car.alpha = .5;
                 model.gameOver = true;
                 emitter.emit(G.PLAY_SOUND, "boom");
 
@@ -208,8 +237,6 @@ class Road extends Phaser.GameObjects.Container
                     loop: false
                 });
 
-            }else{
-                //this.car.alpha = 1;
             }
 
             if(this.object.y > game.config.height)
@@ -237,7 +264,7 @@ class Road extends Phaser.GameObjects.Container
                     });
                 }
 
-                if( model.score == 15)
+                if( model.score == 30)
                 {
                     this.scene.time.addEvent({
                         delay: 0,
@@ -248,6 +275,12 @@ class Road extends Phaser.GameObjects.Container
                 }
 
                 this.addObject();
+            }
+
+            
+            if(model.score >= 10)
+            {
+                this.object2.x += this.vSpace / this.object2.speed;
             }
         }
         

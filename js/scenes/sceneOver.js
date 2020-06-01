@@ -49,15 +49,15 @@ class SceneOver extends Phaser.Scene {
 
     startGame()
     {
-        if(model.score < 5)
+        if(model.score <= 5)
         {
             model.velocity = 10;
             model.score = 0;
             this.scene.start('SceneMain');
-        }else if(model.score == 5) {
+        }else if(model.score > 5 || model.score < 10) {
             model.velocity = 20;
             this.scene.start('SceneMain');
-        }else if(model.score == 10){
+        }else if(model.score >= 10){
             model.velocity = 20;
             this.scene.start('SceneLast');
         }

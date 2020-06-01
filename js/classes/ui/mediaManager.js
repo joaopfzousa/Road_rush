@@ -23,7 +23,6 @@ class MediaManager
 
     playSound(key)
     {
-        console.log("play sound");
         if(model._musicOn == true)
         {
             var sound = this.scene.sound.add(key);

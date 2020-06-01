@@ -49,8 +49,6 @@ class SceneLoad extends Phaser.Scene {
         this.load.image("titleBack", "images/titleBack.jpg");
         this.load.audio("background", ["audio/background.mp3", "audio/background.ogg"]);
         this.load.image("toggleBack", "images/ui/toggles/1.png");
-        this.load.image("sfxOff", "images/ui/icons/sfx_off.png");
-        this.load.image("sfxOn", "images/ui/icons/sfx_on.png");
         this.load.image("musicOn", "images/ui/icons/music_on.png");
         this.load.image("musicOff", "images/ui/icons/music_off.png");
 

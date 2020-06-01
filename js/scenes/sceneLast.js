@@ -15,7 +15,7 @@ class SceneLast extends Phaser.Scene {
         model.gameOver = false;
 
         this.road = new Road({scene:this});
-        this.road.x = game.config.width * .25;
+        this.road.x = game.config.width/2;
         this.road.makeLines();
 
         this.alignGrid = new AlignGrid({
@@ -38,6 +38,7 @@ class SceneLast extends Phaser.Scene {
     update() 
     {
         //constant running loop
+        model.score = 10;
         this.road.moveCar(this.cursors);
         this.road.moveLines();
         this.road.moveObject();

@@ -34,11 +34,10 @@ class SceneMain extends Phaser.Scene {
 
         //this.alignGrid.showNumbers();
         this.alignGrid.placeAtIndex(4, this.sb);
-
-    
+        
         var soundButtons = new SoundButtons({scene: this});
 
-        this.cursors = this.input.keyboard.createCursorKeys()
+        this.cursors = this.input.keyboard.createCursorKeys();
     }
 
     update() 
