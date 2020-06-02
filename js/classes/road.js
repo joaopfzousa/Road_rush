@@ -36,7 +36,10 @@ class Road extends Phaser.GameObjects.Container
         this.back.on('pointerup', this.endInvisible, this);
 
         //add object
-        this.addObject();
+        if(model.score >= 10)
+            this.addObjects();
+        else
+            this.addObject();
 
         emitter.emit(G.SET_SCORE, model.score);
     }
@@ -161,28 +164,77 @@ class Road extends Phaser.GameObjects.Container
 
         Align.scaleToGameW(this.object, scale);
         this.add(this.object);
+    }
 
-        
-        if(model.score >= 10)
-        {
-            this.object2 = this.scene.add.sprite(game.config.height/2, 0, key);
-            this.object2.speed = speed;
-            if(objs[index].key == 'pcar1' || objs[index].key == 'pcar2')
-                this.object2.angle = -90;
-
-            if(lane < 25)
+    addObjects()
+    {
+        var objs = [
             {
-                this.object2.y = game.config.height/2.5;
-            }else if(lane >= 25 ||lane <= 75 ){
-                this.object2.y = game.config.height/1.5;
-            }else if(lane > 75){
-                this.object2.y = game.config.height/3.5;
+                key:'pcar1',
+                speed: model.velocity / 2, 
+                scale:10
+            }, 
+            {
+                key:'pcar2', 
+                speed:model.velocity / 2, 
+                scale:10
+            }, 
+            {
+                key:'cone', 
+                speed: model.velocity, 
+                scale:5
+            }, 
+            {
+                key:'barrier', 
+                speed: model.velocity, 
+                scale:8
             }
+        ];
+        var index1 = Math.floor(Math.random() * 4);
+        var key1 = objs[index1].key;
+        var speed1 = objs[index1].speed;
+        var scale1 = objs[index1].scale / 100;
 
-            Align.scaleToGameW(this.object2, scale);
-            this.add(this.object2);
-        }     
-         
+        var lane = Math.random() * 100;
+
+        this.object = this.scene.add.sprite(- this.displayWidth/4, 0, key1);
+        this.object.speed = speed1;
+        
+        if(lane < 50)
+        {
+            this.object.x = this.displayWidth/4;
+        }
+
+        Align.scaleToGameW(this.object, scale1);
+        this.add(this.object);
+        
+        var index2 = Math.floor(Math.random() * 4);
+        var key2 = objs[index2].key;
+        var speed2 = objs[index2].speed;
+        var scale2 = objs[index2].scale / 100;
+
+        var lane = Math.random() * 100;
+
+        this.object2 = this.scene.add.sprite(- game.config.width/4, 0, key2);
+        this.object2.speed = speed2;
+
+        if(objs[index2].key == 'pcar1' || objs[index2].key == 'pcar2')
+                this.object2.angle = -90;
+    
+        if(lane <= 10)
+        {
+            this.object2.y = game.config.width/0.5;
+        } else if(lane > 10 || lane < 25){
+            this.object2.y = game.config.width/2.5;
+        }else if(lane >= 25 || lane <= 75 ){
+            this.object2.y = game.config.width/1.5;
+        }else if(lane > 75){
+            this.object2.y = game.config.width/3.5;
+        }
+
+
+        Align.scaleToGameW(this.object2, scale2);
+        this.add(this.object2);        
     }
 
     goGameOver()
@@ -276,13 +328,102 @@ class Road extends Phaser.GameObjects.Container
 
                 this.addObject();
             }
+        } 
+    }
 
-            
-            if(model.score >= 10)
-            {
-                this.object2.x += this.vSpace / this.object2.speed;
-            }
+    //mover os objetos
+    moveObjects()
+    {
+        if(model.gameOver == true)
+        {
+            return;
         }
-        
+
+        this.object.y += this.vSpace / this.object.speed;
+        this.object2.x += this.vSpace / this.object2.speed;
+
+
+        if(this.car.alpha != 0)
+        {
+            if(Collision.checkCollide(this.car, this.object) == true)
+            {
+                model.gameOver = true;
+                emitter.emit(G.PLAY_SOUND, "boom");
+
+                //girar o carro para tras
+                this.scene.tweens.add({
+                    targets: this.car,
+                    duration: 1000, 
+                    y: game.config.height, 
+                    angle: -270
+                });
+
+                this.scene.time.addEvent({
+                    delay: 2000,
+                    callback: this.goGameOver, 
+                    callbackScope: this.scene, 
+                    loop: false
+                });
+
+            }
+
+            if(Collision.checkCollide(this.car, this.object2) == true)
+            {
+                model.gameOver = true;
+                emitter.emit(G.PLAY_SOUND, "boom");
+
+                //girar o carro para tras
+                this.scene.tweens.add({
+                    targets: this.car,
+                    duration: 1000, 
+                    x: game.config.width, 
+                    angle: -270
+                });
+
+                this.scene.time.addEvent({
+                    delay: 2000,
+                    callback: this.goGameOver, 
+                    callbackScope: this.scene, 
+                    loop: false
+                });
+
+            }
+
+            if(this.object.y > game.config.height)
+            {
+                emitter.emit(G.UP_POINTS, 1);
+                this.object.destroy();
+
+                if( model.score == 30)
+                {
+                    this.scene.time.addEvent({
+                        delay: 0,
+                        callback: this.goMainAfterWIn, 
+                        callbackScope: this.scene, 
+                        loop: false
+                    });
+                }
+
+                this.addObjects();
+            }
+
+            if(this.object2.y > game.config.width)
+            {
+                emitter.emit(G.UP_POINTS, 1);
+                this.object2.destroy();
+
+                if( model.score == 30)
+                {
+                    this.scene.time.addEvent({
+                        delay: 0,
+                        callback: this.goMainAfterWIn, 
+                        callbackScope: this.scene, 
+                        loop: false
+                    });
+                }
+
+                this.addObjects();
+            }
+        } 
     }
 }

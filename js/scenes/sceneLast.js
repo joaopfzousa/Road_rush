@@ -28,7 +28,7 @@ class SceneLast extends Phaser.Scene {
         var soundButtons = new SoundButtons({scene: this});
 
         this.sb = new ScoreBox({scene:this});
-        this.sb.x = game.config.width/2;
+        this.sb.x = game.config.width - 50;
         this.sb.y = 50;
         //this.alignGrid.placeAtIndex(4, this.sb);
 
@@ -41,6 +41,6 @@ class SceneLast extends Phaser.Scene {
         model.score = 10;
         this.road.moveCar(this.cursors);
         this.road.moveLines();
-        this.road.moveObject();
+        this.road.moveObjects();
     }
 }
